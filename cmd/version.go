@@ -11,7 +11,7 @@ import (
 // It follows semantic versioning.
 // https://goreleaser.com/environment/#using-the-main-version
 // [TODO] pass or otherwise use version defined in main
-const Version = "3.0.15"
+const Version = "3.0.16"
 
 // checkLatest flag for version command.
 var checkLatest bool
