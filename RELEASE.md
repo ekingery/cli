@@ -28,9 +28,9 @@ goreleaser ---dist
 
 # Push to snapcraft
 snapcraft push --release=stable dist/exercism_3.0.16_linux_64bit.snap
-
-# Header over to the release page to test and publish the draft: https://github.com/exercism/cli/releases
 ```
+
+Next, head to [the release page](https://github.com/exercism/cli/releases) to test and publish the draft.
 
 ************** [TODO] Former content below - comb through and update **********
 
