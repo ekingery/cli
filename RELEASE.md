@@ -3,7 +3,7 @@
 The Exercism CLI uses [GoReleaser](https://goreleaser.com) to automate the
 release process. 
 
-## Setup and Install GoReleaser ##
+## Requirements
 
 1. [Install GoReleaser](https://goreleaser.com/install/)
 1. [Install snapcraft](https://snapcraft.io/docs/snapcraft-overview)
@@ -13,26 +13,28 @@ release process.
 ## Cut a release
 
 ```bash
-# You mush be logged into snapcraft to publish a new snap
-snapcraft login
 
-# Test out gorelaser
+# Test run
 goreleaser --skip-publish --snapshot --rm-dist
 
-# Commit changes, then create a new tag and push it
+# Commit any changes, then create a new tag and push it
 git tag -a v3.0.16 -m "Trying out GoReleaser"
 git push origin v3.0.16
 
 # Build and release
 goreleaser ---dist
 
+# You mush be logged into snapcraft to publish a new snap
+snapcraft login
+
 # Push to snapcraft
-snapcraft push --release=stable dist/exercism_3.0.16_linux_64bit.snap
+for f in `ls dist/*.snap`; do snapcraft push --release=stable $f; done
 ```
 
-Next, head to [the release page](https://github.com/exercism/cli/releases) to test and publish the draft.
+Lastly, head to [the release page](https://github.com/exercism/cli/releases) to test and publish the draft.
 
-************** [TODO] Former content below - comb through and update **********
+
+# **** [TODO] Former content below - comb through and update ****
 
 ## Update the Changelog
 
