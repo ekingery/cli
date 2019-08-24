@@ -24,7 +24,7 @@ git push origin v3.0.16
 # Build and release
 goreleaser ---dist
 
-# You mush be logged into snapcraft to publish a new snap
+# You must be logged into snapcraft to publish a new snap
 snapcraft login
 
 # Push to snapcraft
