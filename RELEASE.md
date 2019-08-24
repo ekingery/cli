@@ -29,6 +29,8 @@ snapcraft login
 
 # Push to snapcraft
 for f in `ls dist/*.snap`; do snapcraft push --release=stable $f; done
+
+# [TODO] Push to homebrew
 ```
 
 Lastly, head to [the release page](https://github.com/exercism/cli/releases) to test and publish the draft.
