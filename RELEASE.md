@@ -8,9 +8,31 @@ release process.
 1. [Install GoReleaser](https://goreleaser.com/install/)
 1. [Install snapcraft](https://snapcraft.io/docs/snapcraft-overview)
 1. [Setup Github Token](https://goreleaser.com/environment/#github-token)
+1. Have a gpg key installed on your machine - it is [used for signing the artifacts](https://goreleaser.com/sign/)
 
+## Cut a release
 
-************** Former content below - comb through and update *************
+```bash
+# You mush be logged into snapcraft to publish a new snap
+snapcraft login
+
+# Test out gorelaser
+goreleaser --skip-publish --snapshot --rm-dist
+
+# Commit changes, then create a new tag and push it
+git tag -a v3.0.16 -m "Trying out GoReleaser"
+git push origin v3.0.16
+
+# Build and release
+goreleaser ---dist
+
+# Push to snapcraft
+snapcraft push --release=stable dist/exercism_3.0.16_linux_64bit.snap
+
+# Header over to the release page to test and publish the draft: https://github.com/exercism/cli/releases
+```
+
+************** [TODO] Former content below - comb through and update **********
 
 ## Update the Changelog
 
