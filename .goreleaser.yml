@@ -25,8 +25,15 @@ builds:
     goarm:
       - 5
       - 6
-      - 7
-      - 8
+      # [TODO] - figure out why this is breaking the (snap?) build process
+      # - 7
+      # - 8 - and also deal with this: Invalid GOARM value. Must be 5, 6, or 7
+
+    ignore:
+      - goos: openbsd
+        goarch: arm
+      - goos: freebsd
+        goarch: arm
 
 signs:
   - artifacts: checksum
@@ -142,18 +149,6 @@ snapcrafts:
         # https://snapcraft.io/docs/reference/interfaces.
         plugs: ["home", "network", "removable-media"]
         # [TODO] confirm need for removable-media?
-
-        # If you want your app to be autostarted and to always run in the
-        # background, you can make it a simple daemon.
-        daemon: simple
-
-        # If you any to pass args to your binary, you can add them with the
-        # args option.
-        args: --foo
-
-        # Bash completion snippet. More information about completion here:
-        # https://docs.snapcraft.io/tab-completion-for-snaps.
-        completer: drumroll-completion.bash
 
 
 # [TODO]

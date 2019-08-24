@@ -6,7 +6,8 @@ release process.
 ## Setup and Install GoReleaser ##
 
 1. [Install GoReleaser](https://goreleaser.com/install/)
-2. [Setup Github Token](https://goreleaser.com/environment/#github-token)
+1. [Install snapcraft](https://snapcraft.io/docs/snapcraft-overview)
+1. [Setup Github Token](https://goreleaser.com/environment/#github-token)
 
 
 ************** Former content below - comb through and update *************

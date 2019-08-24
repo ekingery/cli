@@ -3,7 +3,7 @@ package main
 import "github.com/exercism/cli/cmd"
 
 var (
-	version = "dev"
+	Version = "dev"
 	commit  = "none"
 	date    = "unknown"
 )
