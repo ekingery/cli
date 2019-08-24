@@ -28,8 +28,8 @@ builds:
       - 7
       - 8
 
-  signs:
-    - artifacts: checksum
+signs:
+  - artifacts: checksum
 
 
 archives:
@@ -118,10 +118,7 @@ snapcrafts:
     # https://snapcraft.io/docs/reference/channels
     grade: stable
     
-    description: |
-    Exercism is an online platform designed to help you improve your coding skills through practice and mentorship.
-    Exercism provides you with thousands of exercises spread across numerous language tracks.
-    Each one is a fun and interesting challenge designed to teach you a little more about the features of a language.
+    description: Exercism is an online platform designed to help you improve your coding skills through practice and mentorship. Exercism provides you with thousands of exercises spread across numerous language tracks. Each one is a fun and interesting challenge designed to teach you a little more about the features of a language.
 
     # Default: `{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}`
     name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
