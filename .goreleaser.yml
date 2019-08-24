@@ -1,0 +1,266 @@
+# You can find the GoReleaser documentation at http://goreleaser.com
+
+project_name: exercism
+
+builds:
+  -
+    main: ./exercism/main.go
+
+    env:
+      - CGO_ENABLED=0
+
+    goos:
+      - darwin
+      - linux
+      - windows
+      - freebsd
+      - openbsd
+
+    goarch:
+      - amd64
+      - 386
+      - arm
+      - ppc64
+
+    goarm:
+      - 5
+      - 6
+      - 7
+      - 8
+
+  signs:
+    - artifacts: checksum
+
+
+archives:
+- replacements:
+    darwin: Darwin
+    linux: Linux
+    windows: Windows
+    386: i386
+    amd64: x86_64
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ .Tag }}-next"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+    - '^docs:'
+    - '^test:'
+
+release:
+  # Repo in which the release will be created.
+  # Default is extracted from the origin remote URL.
+  # Note: it can only be one: either github or gitlab
+  github:
+    owner: ekingery
+    name: cli
+
+  # If set to true, will not auto-publish the release.
+  # Default is false.
+  draft: true
+
+  # If set to auto, will mark the release as not ready for production
+  # in case there is an indicator for this in the tag e.g. v1.0.0-rc1
+  # If set to true, will mark the release as not ready for production.
+  # Default is false.
+  prerelease: auto
+
+  # You can change the name of the GitHub release.
+  # Default is `{{.Tag}}`
+  name_template: "{{.ProjectName}}-v{{.Version}} {{.Env.USER}}"
+
+  # You can disable this pipe in order to not upload any artifacts to
+  # GitHub.
+  # Defaults to false.
+  # disable: true
+
+
+snapcrafts:
+  -
+    # ID of the snapcraft config, must be unique.
+    # Defaults to "default".
+    # id: snapcraft.yml?
+
+    name: exercism-cli
+    license: MIT
+
+    # Wether to publish the snap to the snapcraft store.
+    # Remember you need to `snapcraft login` first.
+    # Defaults to false.
+    # publish: true
+    
+    summary: Command-line client for https://exercism.io
+
+    # Snaps can be setup to follow three different confinement policies:
+    # `strict`, `devmode` and `classic`. A strict confinement where the snap
+    # can only read and write in its own namespace is recommended. Extra
+    # permissions for strict snaps can be declared as `plugs` for the app, which
+    # are explained later. More info about confinement here:
+    # https://snapcraft.io/docs/reference/confinement
+    confinement: strict
+
+    # A snap of type base to be used as the execution environment for this snap.
+    # Valid values are:
+    # * bare - Empty base snap;
+    # * core - Ubuntu Core 16;
+    # * core18 - Ubuntu Core 18.
+    # Default is empty.
+    base: core18
+
+    # A guardrail to prevent you from releasing a snap to all your users before
+    # it is ready.
+    # `devel` will let you release only to the `edge` and `beta` channels in the
+    # store. `stable` will let you release also to the `candidate` and `stable`
+    # channels. More info about channels here:
+    # https://snapcraft.io/docs/reference/channels
+    grade: stable
+    
+    description: |
+    Exercism is an online platform designed to help you improve your coding skills through practice and mentorship.
+    Exercism provides you with thousands of exercises spread across numerous language tracks.
+    Each one is a fun and interesting challenge designed to teach you a little more about the features of a language.
+
+    # Default: `{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}`
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+
+    # Set to match [the replacements in the code](https://github.com/exercism/cli/blob/32d8ff8c016e78ab49068681e084901d31a58056/cli/cli.go#L31)
+    replacements:
+      amd64: 64bit
+      386: 32bit
+      darwin: mac
+
+    # Each binary built by GoReleaser is an app inside the snap. In this section
+    # you can declare extra details for those binaries. It is optional.
+    apps:
+      # The name of the app must be the same name as the binary built or the snapcraft name.
+      exercism:
+
+        # If your app requires extra permissions to work outside of its default
+        # confined space, declare them here.
+        # You can read the documentation about the available plugs and the
+        # things they allow:
+        # https://snapcraft.io/docs/reference/interfaces.
+        plugs: ["home", "network", "removable-media"]
+        # [TODO] confirm need for removable-media?
+
+        # If you want your app to be autostarted and to always run in the
+        # background, you can make it a simple daemon.
+        daemon: simple
+
+        # If you any to pass args to your binary, you can add them with the
+        # args option.
+        args: --foo
+
+        # Bash completion snippet. More information about completion here:
+        # https://docs.snapcraft.io/tab-completion-for-snaps.
+        completer: drumroll-completion.bash
+
+
+# [TODO]
+brews:
+  -
+    # Name template of the recipe
+    # Default to project name
+    name: myproject
+
+    # IDs of the archives to use.
+    # Defaults to all.
+    ids:
+    - foo
+    - bar
+
+
+    # NOTE: make sure the url_template, the token and given repo (github or gitlab) owner and name are from the
+    # same kind. We will probably unify this in the next major version like it is done with scoop.
+
+    # Github repository to push the tap to.
+    github:
+      owner: github-user
+      name: homebrew-tap
+
+    # OR Gitlab
+    # gitlab:
+    #   owner: gitlab-user
+    #   name: homebrew-tap
+
+    # Template for the url which is determined by the given Token (github or gitlab)
+    # Default for github is "https://github.com/<repo_owner>/<repo_name>/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
+    # Default for gitlab is "https://gitlab.com/<repo_owner>/<repo_name>/uploads/{{ .ArtifactUploadHash }}/{{ .ArtifactName }}"
+    url_template: "http://github.mycompany.com/foo/bar/releases/{{ .Tag }}/{{ .ArtifactName }}"
+
+    # Allows you to set a custom download strategy.
+    # Default is empty.
+    download_strategy: GitHubPrivateRepositoryReleaseDownloadStrategy
+
+    # Allows you to add a custom require_relative at the top of the formula template
+    # Default is empty
+    custom_require: custom_download_strategy
+
+    # Git author used to commit to the repository.
+    # Defaults are shown.
+    commit_author:
+      name: goreleaserbot
+      email: goreleaser@carlosbecker.com
+
+    # Folder inside the repository to put the formula.
+    # Default is the root folder.
+    folder: Formula
+
+    # Caveats for the user of your binary.
+    # Default is empty.
+    caveats: "How to use this binary"
+
+    # Your app's homepage.
+    # Default is empty.
+    homepage: "https://example.com/"
+
+    # Your app's description.
+    # Default is empty.
+    description: "Software to create fast and easy drum rolls."
+
+    # Setting this will prevent goreleaser to actually try to commit the updated
+    # formula - instead, the formula file will be stored on the dist folder only,
+    # leaving the responsibility of publishing it to the user.
+    # If set to auto, the release will not be uploaded to the homebrew tap
+    # in case there is an indicator for prerelease in the tag e.g. v1.0.0-rc1
+    # Default is false.
+    skip_upload: true
+
+    # Custom block for brew.
+    # Can be used to specify alternate downloads for devel or head releases.
+    # Default is empty.
+    custom_block: |
+      head "https://github.com/some/package.git"
+      ...
+
+    # Packages your package depends on.
+    dependencies:
+      - git
+      - zsh
+
+    # Packages that conflict with your package.
+    conflicts:
+      - svn
+      - bash
+
+    # Specify for packages that run as a service.
+    # Default is empty.
+    plist: |
+      <?xml version="1.0" encoding="UTF-8"?>
+      ...
+
+    # So you can `brew test` your formula.
+    # Default is empty.
+    test: |
+      system "#{bin}/program --version"
+      ...
+
+    # Custom install script for brew.
+    # Default is 'bin.install "program"'.
+    install: |
+      bin.install "program"
+      ...
+

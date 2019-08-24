@@ -9,7 +9,8 @@ import (
 
 // Version is the version of the current build.
 // It follows semantic versioning.
-const Version = "3.0.12"
+// https://goreleaser.com/environment/#using-the-main-version
+const Version = main.version
 
 // checkLatest flag for version command.
 var checkLatest bool

@@ -1,23 +1,15 @@
 # Cutting a CLI Release
 
-## Bootstrap Cross-Compilation for Go
+The Exercism CLI uses [GoReleaser](https://goreleaser.com) to automate the
+release process. 
 
-**This only has to be done once.**
+## Setup and Install GoReleaser ##
 
-Change directory to the go source. Then run the bootstrap command for
-each operating system and architecture.
+1. [Install GoReleaser](https://goreleaser.com/install/)
+2. [Setup Github Token](https://goreleaser.com/environment/#github-token)
 
-```plain
-$ cd `which go`/../../src
-$ sudo GCO_ENABLED=0 GOOS=windows GOARCH=386 ./make.bash --no-clean
-$ sudo GCO_ENABLED=0 GOOS=darwin GOARCH=386 ./make.bash --no-clean
-$ sudo GCO_ENABLED=0 GOOS=linux GOARCH=386 ./make.bash --no-clean
-$ sudo GCO_ENABLED=0 GOOS=windows GOARCH=amd64 ./make.bash --no-clean
-$ sudo GCO_ENABLED=0 GOOS=darwin GOARCH=amd64 ./make.bash --no-clean
-$ sudo GCO_ENABLED=0 GOOS=linux GOARCH=amd64 ./make.bash --no-clean
-$ sudo GCO_ENABLED=0 GOOS=linux GOARCH=arm GOARM=6 ./make.bash --no-clean
-$ sudo GCO_ENABLED=0 GOOS=linux GOARCH=arm GOARM=5 ./make.bash --no-clean
-```
+
+************** Former content below - comb through and update *************
 
 ## Update the Changelog
 
@@ -26,6 +18,7 @@ of the Changelog. Make this a separate commit from bumping the version.
 
 You can view changes using the /compare/ view:
 https://github.com/exercism/cli/compare/$PREVIOUS_RELEASE...master
+
 
 ## Bump the version
 
