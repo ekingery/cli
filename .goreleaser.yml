@@ -60,7 +60,8 @@ release:
   # Default is extracted from the origin remote URL.
   # Note: it can only be one: either github or gitlab
   github:
-    owner: ekingery
+    # [TODO] - confirm the default is fine here (then remove this comment)
+    # owner: exercism
     name: cli
 
   # If set to true, will not auto-publish the release.
