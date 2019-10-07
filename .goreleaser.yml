@@ -37,11 +37,19 @@ signs:
 
 
 archives:
-- replacements:
-    amd64: x86_64
-    386: i386
-    darwin: mac
-- name_template: "{{ .ProjectName }}-{{ .Version }}-{{ .Os }}-{{ .Arch }}"
+  -
+    id: exercism-cli
+   
+    builds:
+    - default
+
+    name_template: "{{ .ProjectName }}-{{ .Version }}-{{ .Os }}-{{ .Arch }}"
+
+    replacements:
+      amd64: x86_64
+      386: i386
+      darwin: mac
+
 
 checksum:
   name_template: 'checksums.txt'
