@@ -25,9 +25,6 @@ builds:
     goarm:
       - 5
       - 6
-      # [TODO] - figure out why this is breaking the (snap?) build process
-      # - 7
-      # - 8 - and also deal with this: Invalid GOARM value. Must be 5, 6, or 7
 
     ignore:
       - goos: openbsd
@@ -128,12 +125,12 @@ snapcrafts:
     description: Exercism is an online platform designed to help you improve your coding skills through practice and mentorship. Exercism provides you with thousands of exercises spread across numerous language tracks. Each one is a fun and interesting challenge designed to teach you a little more about the features of a language.
 
     # Default: `{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}`
-    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    name_template: "{{ .ProjectName }}-{{ .Version }}-{{ .Os }}-{{ .Arch }}"
 
     # Set to match [the replacements in the code](https://github.com/exercism/cli/blob/32d8ff8c016e78ab49068681e084901d31a58056/cli/cli.go#L31)
     replacements:
-      amd64: 64bit
-      386: 32bit
+      amd64: x86_64
+      386: i386
       darwin: mac
 
     # Each binary built by GoReleaser is an app inside the snap. In this section
