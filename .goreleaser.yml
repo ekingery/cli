@@ -32,13 +32,15 @@ builds:
       - goos: freebsd
         goarch: arm
 
-checksum:
-  name_template: "{{ .ProjectName }}_checksums.txt"
-  algorithm: sha256
-
-signs:
-  - artifacts: checksum
-
+        # checksum:
+        # [TODO] having an issue with empty checksums...
+        #   name_template: "{{ .ProjectName }}_checksums.txt"
+        #   algorithm: sha256
+        # 
+        # signs:
+        #   - artifacts: checksum
+         
+        
 archives:
   -
     builds:
