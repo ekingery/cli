@@ -38,14 +38,12 @@ archives:
     replacements:
       amd64: x86_64
       386: i386
-      darwin: mac
     format_overrides:
     - goos: windows
       format: zip
 
-#[TODO] - replace?
-#signs:
-#- artifacts: checksum
+signs:
+- artifacts: checksum
 
 release:
   # Repo in which the release will be created.
@@ -115,7 +113,6 @@ snapcrafts:
     replacements:
       amd64: x86_64
       386: i386
-      darwin: mac
 
     # Each binary built by GoReleaser is an app inside the snap. In this section
     # you can declare extra details for those binaries. It is optional.
