@@ -43,7 +43,7 @@ archives:
     builds:
     - default
 
-    name_template: "{{ .ProjectName }}-{{ .Version }}-{{ .Os }}-{{ .Arch }}"
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
 
     replacements:
       amd64: x86_64
