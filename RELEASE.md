@@ -24,6 +24,10 @@ git push origin v3.0.16
 # Build and release
 goreleaser --rm-dist
 
+# If that errors out with a missing github token, there may be an issue where 
+# goreleaser does not read the file in ~/.config (on mac only?). 
+# In that case, try an `export GITHUB_TOKEN=xxx` and then re-run goreleaser
+
 # Remember to update cmd/version.go in the code
 # (until we use: https://goreleaser.com/environment/#using-the-main-version)
 
