@@ -25,9 +25,6 @@ builds:
     goarm:
       - 5
       - 6
-      # [TODO] - figure out why this is breaking the (snap?) build process
-      # - 7
-      # - 8 - and also deal with this: Invalid GOARM value. Must be 5, 6, or 7
 
     ignore:
       - goos: openbsd
@@ -40,10 +37,23 @@ signs:
 
 
 archives:
-- replacements:
-    darwin: mac
-    386: i386
-    amd64: x86_64
+  -
+    builds:
+    - default
+
+    name_template: "{{ .ProjectName }}-{{ .Version }}-{{ .Os }}-{{ .Arch }}"
+
+    replacements:
+      darwin: mac
+      386: i386
+      amd64: x86_64
+
+    format: tar.gz
+
+    format_overrides:
+      - goos: windows
+        format: zip
+
 checksum:
   name_template: 'checksums.txt'
 snapshot:
@@ -132,8 +142,8 @@ snapcrafts:
 
     # Set to match [the replacements in the code](https://github.com/exercism/cli/blob/32d8ff8c016e78ab49068681e084901d31a58056/cli/cli.go#L31)
     replacements:
-      amd64: 64bit
-      386: 32bit
+      amd64: x86_64
+      386: i386
       darwin: mac
 
     # Each binary built by GoReleaser is an app inside the snap. In this section
