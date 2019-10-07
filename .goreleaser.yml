@@ -34,7 +34,7 @@ changelog:
     - '^docs:'
     - '^test:'
 archives:
-  - name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
+  - name_template: "{{ .ProjectName }}-{{ .Version }}-{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
     replacements:
       amd64: x86_64
       386: i386
@@ -109,7 +109,7 @@ snapcrafts:
     
     description: Exercism is an online platform designed to help you improve your coding skills through practice and mentorship. Exercism provides you with thousands of exercises spread across numerous language tracks. Each one is a fun and interesting challenge designed to teach you a little more about the features of a language.
 
-    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
+    name_template: "{{ .ProjectName }}-{{ .Version }}-{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
 
     # Set to match [the replacements in the code](https://github.com/exercism/cli/blob/32d8ff8c016e78ab49068681e084901d31a58056/cli/cli.go#L31)
     replacements:
