@@ -7,7 +7,7 @@ release process.
 
 1. [Install GoReleaser](https://goreleaser.com/install/)
 1. [Install snapcraft](https://snapcraft.io/docs/snapcraft-overview)
-1. [Setup Github Token](https://goreleaser.com/environment/#github-token)
+1. [Setup GitHub token](https://goreleaser.com/environment/#github-token)
 1. Have a gpg key installed on your machine - it is [used for signing the artifacts](https://goreleaser.com/sign/)
 
 ## Cut a release
@@ -22,14 +22,7 @@ git tag -a v3.0.16 -m "Trying out GoReleaser"
 git push origin v3.0.16
 
 # Build and release
-goreleaser --rm-dist
-
-# If that errors out with a missing github token, there may be an issue where 
-# goreleaser does not read the file in ~/.config (on mac only?). 
-# In that case, try an `export GITHUB_TOKEN=xxx` and then re-run goreleaser
-
-# Remember to update cmd/version.go in the code
-# (until we use: https://goreleaser.com/environment/#using-the-main-version)
+goreleaser ---dist
 
 # You must be logged into snapcraft to publish a new snap
 snapcraft login
