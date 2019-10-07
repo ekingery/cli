@@ -22,10 +22,7 @@ git tag -a v3.0.16 -m "Trying out GoReleaser"
 git push origin v3.0.16
 
 # Build and release
-goreleaser --rm-dist
-
-# Remember to update cmd/version.go in the code
-# (until we use: https://goreleaser.com/environment/#using-the-main-version)
+goreleaser ---dist
 
 # You must be logged into snapcraft to publish a new snap
 snapcraft login
