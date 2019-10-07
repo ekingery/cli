@@ -22,7 +22,7 @@ git tag -a v3.0.16 -m "Trying out GoReleaser"
 git push origin v3.0.16
 
 # Build and release
-goreleaser ---dist
+goreleaser --rm-dist
 
 # You must be logged into snapcraft to publish a new snap
 snapcraft login
